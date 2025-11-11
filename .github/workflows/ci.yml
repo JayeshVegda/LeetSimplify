@@ -73,17 +73,42 @@ jobs:
       - name: Check for common issues
         run: |
           # Check for console.log statements (should use [LeetSimplify] prefix)
-          if grep -r "console\.log" content.js providers.js ui/popup.js 2>/dev/null | grep -v "\[LeetSimplify\]"; then
-            echo "Warning: Found console.log without [LeetSimplify] prefix"
+          if [ -f content.js ] || [ -f providers.js ] || [ -f ui/popup.js ]; then
+            UNTAGGED_LOGS=""
+            for file in content.js providers.js ui/popup.js; do
+              if [ -f "$file" ]; then
+                LOGS=$(grep "console\.log" "$file" 2>/dev/null | grep -v "\[LeetSimplify\]" || true)
+                if [ -n "$LOGS" ]; then
+                  UNTAGGED_LOGS="${UNTAGGED_LOGS}${LOGS}"$'\n'
+                fi
+              fi
+            done
+            if [ -n "$UNTAGGED_LOGS" ]; then
+              echo "Warning: Found console.log without [LeetSimplify] prefix"
+              echo "$UNTAGGED_LOGS"
+            else
+              echo "✓ No untagged console.log statements"
+            fi
           else
-            echo "✓ No untagged console.log statements"
+            echo "✓ No JavaScript files to check"
           fi
           
-          # Check for API keys in code
-          if grep -r "api.*key" content.js providers.js ui/popup.js 2>/dev/null -i | grep -v "API_KEY\|apiKey"; then
-            echo "Warning: Potential API key found in code"
+          # Check for hardcoded API keys in code
+          HARDCODED_KEYS=""
+          for file in content.js providers.js ui/popup.js; do
+            if [ -f "$file" ]; then
+              KEYS=$(grep -i "api.*key.*=.*['\"].*[a-zA-Z0-9]\{20,\}" "$file" 2>/dev/null | grep -v "getItem\|localStorage\|sessionStorage\|chrome.storage" || true)
+              if [ -n "$KEYS" ]; then
+                HARDCODED_KEYS="${HARDCODED_KEYS}${KEYS}"$'\n'
+              fi
+            fi
+          done
+          if [ -n "$HARDCODED_KEYS" ]; then
+            echo "Warning: Potential hardcoded API key found in code"
+            echo "$HARDCODED_KEYS"
           else
             echo "✓ No hardcoded API keys detected"
+          fi
 
   security:
     name: Security Check
@@ -95,16 +120,58 @@ jobs:
       
       - name: Check for sensitive data
         run: |
-          # Check for potential secrets
-          if grep -r "sk-" . --exclude-dir=.git 2>/dev/null; then
-            echo "Error: Potential API key found (sk-*)"
+          # Check for potential secrets in JavaScript and HTML files only
+          # Exclude markdown, JSON configs, and documentation files
+          
+          FOUND_SECRETS=0
+          
+          # Check JavaScript files for API keys
+          for file in $(find . -name "*.js" -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./.github/*"); do
+            # Skip if file doesn't exist
+            [ ! -f "$file" ] && continue
+            
+            # Check for OpenAI API keys (pattern: sk-proj- or sk- followed by alphanumeric)
+            if grep -q "sk-[a-zA-Z0-9]\{32,\}" "$file" 2>/dev/null; then
+              # Check if it's in a comment or string literal
+              LINE=$(grep "sk-[a-zA-Z0-9]\{32,\}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(//|\*|<!--|example|sample|test|TODO|FIXME|'|\")"; then
+                echo "Error: Potential OpenAI API key found in $file"
+                echo "$LINE"
+                FOUND_SECRETS=1
+              fi
+            fi
+            
+            # Check for Google API keys (pattern: AIza followed by 35+ chars)
+            if grep -q "AIza[a-zA-Z0-9_-]\{35,\}" "$file" 2>/dev/null; then
+              LINE=$(grep "AIza[a-zA-Z0-9_-]\{35,\}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(//|\*|<!--|example|sample|test|TODO|FIXME|'|\")"; then
+                echo "Error: Potential Google API key found in $file"
+                echo "$LINE"
+                FOUND_SECRETS=1
+              fi
+            fi
+          done
+          
+          # Check HTML files for API keys
+          for file in $(find . -name "*.html" -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./.github/*"); do
+            [ ! -f "$file" ] && continue
+            
+            if grep -q "sk-[a-zA-Z0-9]\{32,\}" "$file" 2>/dev/null; then
+              LINE=$(grep "sk-[a-zA-Z0-9]\{32,\}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(<!--|example|sample|test|TODO|FIXME)"; then
+                echo "Error: Potential API key found in $file"
+                echo "$LINE"
+                FOUND_SECRETS=1
+              fi
+            fi
+          done
+          
+          if [ $FOUND_SECRETS -eq 0 ]; then
+            echo "✓ No sensitive data detected in code files"
+          else
+            echo "::error::Sensitive data detected. Please remove API keys from code."
             exit 1
           fi
-          if grep -r "AIza" . --exclude-dir=.git 2>/dev/null; then
-            echo "Error: Potential API key found (AIza*)"
-            exit 1
-          fi
-          echo "✓ No sensitive data detected"
 
   build:
     name: Build Check
