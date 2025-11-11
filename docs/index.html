@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetSimplify - Chrome Extension</title>
+    <meta name="description" content="Transform complex LeetCode problems into beginner-friendly explanations using AI">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .badge:hover {
+            background: #2980b9;
+            text-decoration: none;
+        }
+        .badge.secondary {
+            background: #95a5a6;
+        }
+        .badge.secondary:hover {
+            background: #7f8c8d;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .install-section {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LeetSimplify 🚀</h1>
+            <p class="tagline">Transform complex LeetCode problems into beginner-friendly explanations using AI</p>
+            <div class="badges">
+                <a href="https://github.com/JayeshVegda/LeetSimplify" class="badge">GitHub</a>
+                <a href="https://github.com/JayeshVegda/LeetSimplify/releases" class="badge">Releases</a>
+                <a href="https://github.com/JayeshVegda/LeetSimplify/issues" class="badge">Issues</a>
+                <a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/README.md" class="badge secondary">Documentation</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2>✨ Features</h2>
+            <ul class="feature-list">
+                <li>Multiple AI Providers - Gemini, ChatGPT, Claude, Cohere, Mistral, and Local LLMs (Ollama)</li>
+                <li>Two Simplification Modes - No Hint and With Hint</li>
+                <li>Privacy-First - Use local LLMs for complete privacy</li>
+                <li>Complete Problem Details - Preserves ALL conditions, constraints, and edge cases</li>
+                <li>Seamless Integration - Beautiful UI that blends with LeetCode's interface</li>
+                <li>Fast & Reliable - Optimized for quick responses</li>
+                <li>Detailed Examples - Step-by-step dry-run explanations</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>📦 Installation</h2>
+            <div class="install-section">
+                <h3>From Source</h3>
+                <ol>
+                    <li>Clone the repository:
+                        <pre><code>git clone https://github.com/JayeshVegda/LeetSimplify.git
+cd LeetSimplify</code></pre>
+                    </li>
+                    <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+                    <li>Enable "Developer mode" (toggle in top right)</li>
+                    <li>Click "Load unpacked" and select the LeetSimplify directory</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🚀 Quick Start</h2>
+            <ol>
+                <li>Click the extension icon to open settings</li>
+                <li>Select your preferred provider (Gemini, ChatGPT, Claude, etc.)</li>
+                <li>Enter your API key</li>
+                <li>Choose simplification mode (No Hint / With Hint)</li>
+                <li>Click "Save Settings"</li>
+                <li>Navigate to a LeetCode problem and click "Simplify"</li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2>🔒 Privacy</h2>
+            <p><strong>Cloud providers:</strong> Problem descriptions are sent to the selected API provider.</p>
+            <p><strong>Local LLMs (Ollama):</strong> Complete privacy - all processing happens on your machine. No data leaves your computer.</p>
+        </section>
+
+        <section class="section">
+            <h2>📚 Documentation</h2>
+            <ul class="feature-list">
+                <li><a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/README.md">Full Documentation</a></li>
+                <li><a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/OLLAMA_SETUP.md">Ollama Setup Guide</a></li>
+                <li><a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/QUICK_FIX.md">Quick Fix Guide</a></li>
+                <li><a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/CONTRIBUTING.md">Contributing Guidelines</a></li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p>Made with ❤️ for the LeetCode community</p>
+            <p>
+                <a href="https://github.com/JayeshVegda/LeetSimplify">GitHub</a> ·
+                <a href="https://github.com/JayeshVegda/LeetSimplify/issues">Report Bug</a> ·
+                <a href="https://github.com/JayeshVegda/LeetSimplify/issues">Request Feature</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                Licensed under <a href="https://github.com/JayeshVegda/LeetSimplify/blob/main/LICENSE">MIT License</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+

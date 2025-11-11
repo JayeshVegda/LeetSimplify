@@ -63,3 +63,7 @@ test-*.md
 *.test.js
 *.spec.js
 
+# GitHub Pages
+_site/
+.site/
+

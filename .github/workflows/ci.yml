@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    name: Lint and Validate
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate manifest.json
+        run: |
+          # Check if manifest.json exists and is valid JSON
+          if [ ! -f manifest.json ]; then
+            echo "Error: manifest.json not found"
+            exit 1
+          fi
+          # Validate JSON syntax
+          python3 -m json.tool manifest.json > /dev/null
+          echo "✓ manifest.json is valid JSON"
+      
+      - name: Validate prompts.json
+        run: |
+          # Check if prompts.json exists and is valid JSON
+          if [ ! -f prompts.json ]; then
+            echo "Error: prompts.json not found"
+            exit 1
+          fi
+          # Validate JSON syntax
+          python3 -m json.tool prompts.json > /dev/null
+          echo "✓ prompts.json is valid JSON"
+      
+      - name: Check required files
+        run: |
+          required_files=("content.js" "providers.js" "manifest.json" "prompts.json" "README.md" "LICENSE")
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Error: Required file $file not found"
+              exit 1
+            fi
+          done
+          echo "✓ All required files present"
+      
+      - name: Check file permissions
+        run: |
+          # Check if extension files have correct structure
+          if [ ! -d "ui" ]; then
+            echo "Error: ui directory not found"
+            exit 1
+          fi
+          if [ ! -d "icons" ]; then
+            echo "Error: icons directory not found"
+            exit 1
+          fi
+          echo "✓ Directory structure is correct"
+      
+      - name: Validate manifest version
+        run: |
+          version=$(python3 -c "import json; print(json.load(open('manifest.json'))['version'])")
+          if [ -z "$version" ]; then
+            echo "Error: Version not found in manifest.json"
+            exit 1
+          fi
+          echo "✓ Manifest version: $version"
+      
+      - name: Check for common issues
+        run: |
+          # Check for console.log statements (should use [LeetSimplify] prefix)
+          if grep -r "console\.log" content.js providers.js ui/popup.js 2>/dev/null | grep -v "\[LeetSimplify\]"; then
+            echo "Warning: Found console.log without [LeetSimplify] prefix"
+          else
+            echo "✓ No untagged console.log statements"
+          fi
+          
+          # Check for API keys in code
+          if grep -r "api.*key" content.js providers.js ui/popup.js 2>/dev/null -i | grep -v "API_KEY\|apiKey"; then
+            echo "Warning: Potential API key found in code"
+          else
+            echo "✓ No hardcoded API keys detected"
+
+  security:
+    name: Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check for sensitive data
+        run: |
+          # Check for potential secrets
+          if grep -r "sk-" . --exclude-dir=.git 2>/dev/null; then
+            echo "Error: Potential API key found (sk-*)"
+            exit 1
+          fi
+          if grep -r "AIza" . --exclude-dir=.git 2>/dev/null; then
+            echo "Error: Potential API key found (AIza*)"
+            exit 1
+          fi
+          echo "✓ No sensitive data detected"
+
+  build:
+    name: Build Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Create extension package
+        run: |
+          # Create a ZIP file to verify all files are present
+          zip -r leetsimplify-check.zip . -x "*.git*" -x "*.md" -x ".github/*" -x "*.zip"
+          ls -lh leetsimplify-check.zip
+          echo "✓ Extension package created successfully"
+      
+      - name: Verify package contents
+        run: |
+          unzip -l leetsimplify-check.zip | grep -E "(manifest.json|content.js|providers.js)" || exit 1
+          echo "✓ Package contains required files"
+

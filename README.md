@@ -8,6 +8,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Chrome](https://img.shields.io/badge/chrome-extension-4285F4?logo=google-chrome)](https://chrome.google.com/webstore)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![CI](https://github.com/JayeshVegda/LeetSimplify/actions/workflows/ci.yml/badge.svg)](https://github.com/JayeshVegda/LeetSimplify/actions/workflows/ci.yml)
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://jayeshvegda.github.io/LeetSimplify/)
 
 *Making coding interview preparation accessible to everyone*
 
