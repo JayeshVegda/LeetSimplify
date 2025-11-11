@@ -1,0 +1,19 @@
+{
+    "goal": "Implement and refine a Chrome extension that injects a 'Simplify' button on LeetCode problem pages, extracts the problem text, sends it to Gemini API for simplification, and displays the output on the page.",
+    "priorities": [
+      "Correct DOM selection and injection",
+      "Reliable Gemini API call",
+      "Clean UI rendering of results",
+      "Robust error handling"
+    ],
+    "phases": [
+      "Make it work (MVP)",
+      "Add reliability and UX polish",
+      "Add caching and cloud sync"
+    ],
+    "dependencies": [
+      "chrome.storage",
+      "fetch API"
+    ]
+  }
+  

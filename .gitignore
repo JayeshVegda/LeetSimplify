@@ -1,0 +1,64 @@
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Node modules (if you add build tools later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs (if you add build tools later)
+dist/
+build/
+*.crx
+*.pem
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Misc
+*.zip
+*.tar.gz
+
+# Documentation files (keep these, but ignore generated ones)
+# Keep: README.md, LICENSE, CONTRIBUTING.md, CHANGELOG.md, SECURITY.md
+# Keep: OLLAMA_SETUP.md, QUICK_FIX.md
+
+# Test files
+test-*.md
+*.test.js
+*.spec.js
+
