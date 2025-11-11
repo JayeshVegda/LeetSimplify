@@ -136,8 +136,10 @@ jobs:
             if grep -qE "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" 2>/dev/null; then
               # Get the line and check if it's in a comment
               LINE=$(grep -E "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" | head -1)
-              # Skip if it's clearly in a comment, string, or documentation
-              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'sk-|\"sk-|`sk-)"; then
+              # Skip if it's clearly in a comment or documentation (check for comment markers and docs keywords)
+              IS_COMMENT=$(echo "$LINE" | grep -E "(//|\*|/\*|\*/|<!--|-->)" || true)
+              IS_DOCS=$(echo "$LINE" | grep -iE "(example|sample|test|TODO|FIXME|documentation)" || true)
+              if [ -z "$IS_COMMENT" ] && [ -z "$IS_DOCS" ]; then
                 echo "Error: Potential OpenAI API key found in $file"
                 echo "Line: $LINE"
                 FOUND_SECRETS=1
@@ -147,7 +149,9 @@ jobs:
             # Check for Google API keys: AIza followed by exactly 35 characters (Google key format)
             if grep -qE "AIza[0-9A-Za-z_-]{35}" "$file" 2>/dev/null; then
               LINE=$(grep -E "AIza[0-9A-Za-z_-]{35}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'AIza|\"AIza|`AIza)"; then
+              IS_COMMENT=$(echo "$LINE" | grep -E "(//|\*|/\*|\*/|<!--|-->)" || true)
+              IS_DOCS=$(echo "$LINE" | grep -iE "(example|sample|test|TODO|FIXME|documentation)" || true)
+              if [ -z "$IS_COMMENT" ] && [ -z "$IS_DOCS" ]; then
                 echo "Error: Potential Google API key found in $file"
                 echo "Line: $LINE"
                 FOUND_SECRETS=1
@@ -157,7 +161,9 @@ jobs:
             # Check for Anthropic API keys: sk-ant- followed by long string
             if grep -qE "sk-ant-[a-zA-Z0-9_-]{95,}" "$file" 2>/dev/null; then
               LINE=$(grep -E "sk-ant-[a-zA-Z0-9_-]{95,}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'sk-ant-|\"sk-ant-|`sk-ant-)"; then
+              IS_COMMENT=$(echo "$LINE" | grep -E "(//|\*|/\*|\*/|<!--|-->)" || true)
+              IS_DOCS=$(echo "$LINE" | grep -iE "(example|sample|test|TODO|FIXME|documentation)" || true)
+              if [ -z "$IS_COMMENT" ] && [ -z "$IS_DOCS" ]; then
                 echo "Error: Potential Anthropic API key found in $file"
                 echo "Line: $LINE"
                 FOUND_SECRETS=1
@@ -174,7 +180,9 @@ jobs:
             # Only check for very long API key patterns in HTML
             if grep -qE "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" 2>/dev/null; then
               LINE=$(grep -E "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(<!--|-->|example|sample|test|TODO|FIXME)"; then
+              IS_COMMENT=$(echo "$LINE" | grep -E "(<!--|-->)" || true)
+              IS_DOCS=$(echo "$LINE" | grep -iE "(example|sample|test|TODO|FIXME|documentation)" || true)
+              if [ -z "$IS_COMMENT" ] && [ -z "$IS_DOCS" ]; then
                 echo "Error: Potential API key found in $file"
                 echo "Line: $LINE"
                 FOUND_SECRETS=1
