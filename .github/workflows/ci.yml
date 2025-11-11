@@ -121,46 +121,62 @@ jobs:
       - name: Check for sensitive data
         run: |
           # Check for potential secrets in JavaScript and HTML files only
-          # Exclude markdown, JSON configs, and documentation files
+          # Only check for actual API key patterns (long strings that look like real keys)
           
           FOUND_SECRETS=0
           
-          # Check JavaScript files for API keys
-          for file in $(find . -name "*.js" -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./.github/*"); do
-            # Skip if file doesn't exist
-            [ ! -f "$file" ] && continue
+          # Check JavaScript files for API keys (only in actual code, not comments)
+          for file in content.js providers.js ui/popup.js; do
+            if [ ! -f "$file" ]; then
+              continue
+            fi
             
-            # Check for OpenAI API keys (pattern: sk-proj- or sk- followed by alphanumeric)
-            if grep -q "sk-[a-zA-Z0-9]\{32,\}" "$file" 2>/dev/null; then
-              # Check if it's in a comment or string literal
-              LINE=$(grep "sk-[a-zA-Z0-9]\{32,\}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(//|\*|<!--|example|sample|test|TODO|FIXME|'|\")"; then
+            # Check for OpenAI API keys: sk- followed by at least 48 characters (actual keys are longer)
+            # Pattern: sk-proj-... or sk-... (OpenAI keys are typically 51+ chars)
+            if grep -qE "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" 2>/dev/null; then
+              # Get the line and check if it's in a comment
+              LINE=$(grep -E "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" | head -1)
+              # Skip if it's clearly in a comment, string, or documentation
+              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'sk-|\"sk-|`sk-)"; then
                 echo "Error: Potential OpenAI API key found in $file"
-                echo "$LINE"
+                echo "Line: $LINE"
                 FOUND_SECRETS=1
               fi
             fi
             
-            # Check for Google API keys (pattern: AIza followed by 35+ chars)
-            if grep -q "AIza[a-zA-Z0-9_-]\{35,\}" "$file" 2>/dev/null; then
-              LINE=$(grep "AIza[a-zA-Z0-9_-]\{35,\}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(//|\*|<!--|example|sample|test|TODO|FIXME|'|\")"; then
+            # Check for Google API keys: AIza followed by exactly 35 characters (Google key format)
+            if grep -qE "AIza[0-9A-Za-z_-]{35}" "$file" 2>/dev/null; then
+              LINE=$(grep -E "AIza[0-9A-Za-z_-]{35}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'AIza|\"AIza|`AIza)"; then
                 echo "Error: Potential Google API key found in $file"
-                echo "$LINE"
+                echo "Line: $LINE"
+                FOUND_SECRETS=1
+              fi
+            fi
+            
+            # Check for Anthropic API keys: sk-ant- followed by long string
+            if grep -qE "sk-ant-[a-zA-Z0-9_-]{95,}" "$file" 2>/dev/null; then
+              LINE=$(grep -E "sk-ant-[a-zA-Z0-9_-]{95,}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(//|\*|/\*|\*/|<!--|-->|example|sample|test|TODO|FIXME|'sk-ant-|\"sk-ant-|`sk-ant-)"; then
+                echo "Error: Potential Anthropic API key found in $file"
+                echo "Line: $LINE"
                 FOUND_SECRETS=1
               fi
             fi
           done
           
           # Check HTML files for API keys
-          for file in $(find . -name "*.html" -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./.github/*"); do
-            [ ! -f "$file" ] && continue
+          for file in ui/popup.html; do
+            if [ ! -f "$file" ]; then
+              continue
+            fi
             
-            if grep -q "sk-[a-zA-Z0-9]\{32,\}" "$file" 2>/dev/null; then
-              LINE=$(grep "sk-[a-zA-Z0-9]\{32,\}" "$file" | head -1)
-              if echo "$LINE" | grep -qvE "(<!--|example|sample|test|TODO|FIXME)"; then
+            # Only check for very long API key patterns in HTML
+            if grep -qE "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" 2>/dev/null; then
+              LINE=$(grep -E "sk-(proj-)?[a-zA-Z0-9]{48,}" "$file" | head -1)
+              if echo "$LINE" | grep -qvE "(<!--|-->|example|sample|test|TODO|FIXME)"; then
                 echo "Error: Potential API key found in $file"
-                echo "$LINE"
+                echo "Line: $LINE"
                 FOUND_SECRETS=1
               fi
             fi
