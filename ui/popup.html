@@ -6,113 +6,165 @@
   <title>LeetSimplify</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="popup.css">
 </head>
-<body>
-  <div class="wrap">
+<body class="popup-body">
+  <main class="layout" role="dialog" aria-labelledby="title">
     <!-- Header -->
-    <header class="header" role="banner">
-      <div>
-        <h1 class="title">LeetSimplify</h1>
-        <p class="subtitle">Craft friendlier problem statements.</p>
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <h1 id="title" class="title">LeetSimplify</h1>
+          <p class="tagline">AI-powered problem simplification</p>
+        </div>
+        <div class="status-badge" id="statusBadge">
+          <span class="status-dot"></span>
+          <span class="status-text">Active</span>
+        </div>
       </div>
-      <div class="logo" aria-hidden="true">LS</div>
     </header>
 
-    <!-- Simplification Assistant -->
-    <section class="section" aria-labelledby="assist-label">
-      <div class="row">
-        <div class="grow">
-          <p id="assist-label" class="title-sm">Simplification Assistant</p>
-          <p class="desc">Inject the button and call your selected provider.</p>
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Simplify Toggle Section -->
+      <section class="card card-inline" aria-labelledby="toggle-heading">
+        <div class="card-content-inline">
+          <h2 id="toggle-heading" class="card-title">
+            <span class="icon">✨</span>
+            Simplify Feature
+          </h2>
+          <label class="toggle-wrapper" aria-label="Toggle Simplify feature">
+            <input id="enabledToggle" type="checkbox" class="toggle-input">
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label">
+              <span class="toggle-label-on">Enabled</span>
+              <span class="toggle-label-off">Disabled</span>
+            </span>
+          </label>
         </div>
-        <input id="enabledToggle" class="switch" type="checkbox" aria-label="Enable Simplification Assistant">
-      </div>
-    </section>
+      </section>
 
-    <!-- Simplification Mode -->
-    <section class="section" aria-labelledby="mode-label">
-      <p id="mode-label" class="label">Simplification Mode</p>
-      <div class="seg" role="tablist" aria-label="Simplification Mode">
-        <button class="seg-btn active" role="tab" aria-selected="true" data-mode="noHint">No Hint</button>
-        <button class="seg-btn" role="tab" aria-selected="false" data-mode="withHint">With Hint</button>
-      </div>
-    </section>
+      <!-- Preferences Section -->
+      <section class="card" aria-labelledby="mode-heading">
+        <div class="card-header">
+          <h2 id="mode-heading" class="card-title">
+            <span class="icon">⚙️</span>
+            Preferences
+          </h2>
+        </div>
+        <div class="card-content">
+          <div class="seg-group" role="radiogroup" aria-label="Simplification mode">
+            <button type="button" class="seg-btn" data-mode="withHint" role="radio" aria-checked="false">
+              <span class="seg-icon">💡</span>
+              <span class="seg-label">With Hint</span>
+            </button>
+            <button type="button" class="seg-btn active" data-mode="noHint" role="radio" aria-checked="true">
+              <span class="seg-icon">📝</span>
+              <span class="seg-label">No Hint</span>
+            </button>
+          </div>
+        </div>
+      </section>
 
-    <!-- Provider -->
-    <section class="section" aria-labelledby="provider-label">
-      <p id="provider-label" class="label">Provider</p>
+      <!-- Provider Settings Section -->
+      <section class="card" aria-labelledby="provider-heading">
+        <div class="card-header">
+          <h2 id="provider-heading" class="card-title">
+            <span class="icon">🔌</span>
+            AI Provider
+          </h2>
+        </div>
+        <div class="card-content">
+          <div class="fields">
+            <div class="field">
+              <label for="providerSelect" class="field-label">
+                Provider Type
+              </label>
+              <div class="select-wrapper">
+                <select id="providerSelect" class="field-input select">
+                  <option value="gemini">Gemini (Google)</option>
+                  <option value="anthropic">Claude (Anthropic)</option>
+                  <option value="openai">ChatGPT (OpenAI)</option>
+                  <option value="cohere">Command (Cohere)</option>
+                  <option value="mistral">Mistral</option>
+                  <option value="local">Local (Ollama/Self-hosted)</option>
+                </select>
+              </div>
+            </div>
 
-      <div class="field">
-        <label for="providerSelect">Primary Provider</label>
-        <select id="providerSelect" class="select">
-          <option value="gemini">Gemini (Google)</option>
-          <option value="anthropic">Claude (Anthropic)</option>
-          <option value="openai">ChatGPT (OpenAI)</option>
-          <option value="cohere">Command (Cohere)</option>
-          <option value="mistral">Mistral</option>
-          <option value="local">Local (Ollama/Self-hosted)</option>
-        </select>
-      </div>
+            <div class="field" id="modelField" style="display: none;">
+              <label for="modelInput" class="field-label">Model Name</label>
+              <input
+                id="modelInput"
+                class="field-input"
+                type="text"
+                placeholder="e.g., mistral"
+                autocomplete="off"
+              >
+            </div>
 
-      <div class="field" id="endpointField" style="display: none;">
-        <label for="endpointInput">API Endpoint</label>
-        <input
-          id="endpointInput"
-          class="input"
-          type="text"
-          placeholder="http://127.0.0.1:11434/v1/chat/completions"
-          autocomplete="off"
-        >
-        <small style="color: #9ca3af; font-size: 11px; margin-top: 4px; display: block;">
-          OpenAI-compatible: http://127.0.0.1:11434/v1/chat/completions<br>
-          Or Ollama native: http://127.0.0.1:11434/api/generate
-        </small>
-      </div>
+            <div class="field" id="endpointField" style="display: none;">
+              <label for="endpointInput" class="field-label">API Endpoint</label>
+              <input
+                id="endpointInput"
+                class="field-input"
+                type="text"
+                placeholder="http://127.0.0.1:11434/v1/chat/completions"
+                autocomplete="off"
+              >
+              <span class="field-hint">Use OpenAI-compatible or Ollama native endpoints</span>
+            </div>
 
-      <div class="field" id="modelField" style="display: none;">
-        <label for="modelInput">Model Name</label>
-        <input
-          id="modelInput"
-          class="input"
-          type="text"
-          placeholder="mistral"
-          autocomplete="off"
-        >
-        <small style="color: #9ca3af; font-size: 11px; margin-top: 4px; display: block;">
-          Model name (e.g., mistral, llama3, codellama)
-        </small>
-      </div>
+            <div class="field">
+              <label for="apiKeyInput" class="field-label">
+                <span id="apiKeyLabel">API Key</span>
+                <a id="apiKeyHelpLink" class="field-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">
+                  Need help?
+                </a>
+              </label>
+              <input
+                id="apiKeyInput"
+                class="field-input"
+                type="password"
+                placeholder="Paste your API key here"
+                autocomplete="off"
+              >
+              <span id="apiKeyHint" class="field-hint" style="display: none;">
+                Optional for local providers (use any value like "local")
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="field">
-        <label id="apiKeyLabel" for="apiKeyInput">Gemini API Key</label>
-        <input
-          id="apiKeyInput"
-          class="input"
-          type="password"
-          placeholder="Paste Gemini API key"
-          autocomplete="off"
-        >
-        <small id="apiKeyHint" style="color: #9ca3af; font-size: 11px; margin-top: 4px; display: none;">
-          Optional for local providers (use any value like "local")
-        </small>
-      </div>
-
-      <div class="actions" style="margin-top: 16px;">
-        <button id="resetBtn" class="btn" type="button">Reset</button>
-        <button id="saveBtn" class="btn btn-primary" type="button">Save Settings</button>
-      </div>
-    </section>
+      <!-- Actions Section -->
+      <section class="actions-section">
+        <div class="actions">
+          <button id="resetBtn" class="btn btn-secondary" type="button">
+            <span class="btn-icon">↻</span>
+            Reset
+          </button>
+          <button id="saveBtn" class="btn btn-primary" type="button">
+            <span class="btn-icon">✓</span>
+            Save Changes
+          </button>
+        </div>
+      </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-      <span id="version">v1.1.0</span>
+    <footer class="footer">
+      <p class="footer-text">
+        <a href="https://github.com/JayeshVegda/LeetSimplify" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <span class="footer-separator">•</span>
+        Made by <a href="https://github.com/JayeshVegda" target="_blank" rel="noopener noreferrer" class="footer-link">jayesh vegda</a>
+      </p>
     </footer>
-  </div>
+  </main>
 
   <script src="popup.js"></script>
 </body>
 </html>
-
-

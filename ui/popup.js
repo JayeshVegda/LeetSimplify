@@ -11,12 +11,23 @@
     local: 'Local (Ollama)'
   };
 
+  const providerApiUrls = {
+    gemini: 'https://aistudio.google.com/app/apikey',
+    anthropic: 'https://console.anthropic.com/settings/keys',
+    openai: 'https://platform.openai.com/api-keys',
+    cohere: 'https://dashboard.cohere.com/api-keys',
+    mistral: 'https://console.mistral.ai/api-keys/',
+    local: 'https://github.com/ollama/ollama'
+  };
+
   const enabledToggle = document.getElementById('enabledToggle');
+  const statusBadge = document.getElementById('statusBadge');
   const segButtons = Array.from(document.querySelectorAll('.seg-btn'));
   const providerSelect = document.getElementById('providerSelect');
   const apiKeyInput = document.getElementById('apiKeyInput');
   const apiKeyLabel = document.getElementById('apiKeyLabel');
   const apiKeyHint = document.getElementById('apiKeyHint');
+  const apiKeyHelpLink = document.getElementById('apiKeyHelpLink');
   const endpointInput = document.getElementById('endpointInput');
   const endpointField = document.getElementById('endpointField');
   const modelInput = document.getElementById('modelInput');
@@ -42,11 +53,20 @@
   }
 
   function bindEvents() {
+    enabledToggle.addEventListener('change', async () => {
+      updateStatusBadge();
+      await autoSaveEnabled();
+    });
+    
     segButtons.forEach(btn => {
-      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+      btn.addEventListener('click', async () => {
+        setMode(btn.dataset.mode);
+        await autoSaveMode();
+      });
     });
 
     providerSelect.addEventListener('change', () => {
+      clearValidation();
       updateApiLabel();
       updateLocalFields();
       loadProviderKey(providerSelect.value);
@@ -54,6 +74,49 @@
 
     saveBtn.addEventListener('click', handleSave);
     resetBtn.addEventListener('click', handleReset);
+  }
+
+  function updateStatusBadge() {
+    if (statusBadge) {
+      const isEnabled = enabledToggle.checked;
+      statusBadge.classList.toggle('inactive', !isEnabled);
+      const statusText = statusBadge.querySelector('.status-text');
+      if (statusText) {
+        statusText.textContent = isEnabled ? 'Active' : 'Inactive';
+      }
+    }
+  }
+
+  async function autoSaveEnabled() {
+    try {
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
+        const current = await new Promise(resolve => {
+          chrome.storage.sync.get(['enabled', 'mode', 'provider', 'apiKeys', 'apiKey', 'endpoints', 'models'], (s) => resolve(s || {}));
+        });
+        await chrome.storage.sync.set({
+          ...current,
+          enabled: enabledToggle.checked
+        });
+      }
+    } catch (err) {
+      console.error('Failed to auto-save enabled state:', err);
+    }
+  }
+
+  async function autoSaveMode() {
+    try {
+      if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
+        const current = await new Promise(resolve => {
+          chrome.storage.sync.get(['enabled', 'mode', 'provider', 'apiKeys', 'apiKey', 'endpoints', 'models'], (s) => resolve(s || {}));
+        });
+        await chrome.storage.sync.set({
+          ...current,
+          mode: currentMode
+        });
+      }
+    } catch (err) {
+      console.error('Failed to auto-save mode:', err);
+    }
   }
 
   function loadConfig() {
@@ -69,6 +132,7 @@
         if (!cfg.apiKeys.gemini && cfg.apiKey) cfg.apiKeys.gemini = cfg.apiKey;
 
         enabledToggle.checked = cfg.enabled !== false;
+        updateStatusBadge();
         setMode(cfg.mode || 'noHint');
         const validProvider = providerIds.includes((cfg.provider || '').toLowerCase()) ? cfg.provider : 'gemini';
         providerSelect.value = validProvider;
@@ -80,6 +144,7 @@
       });
     } else {
       enabledToggle.checked = defaultConfig.enabled;
+      updateStatusBadge();
       setMode(defaultConfig.mode);
       providerSelect.value = defaultConfig.provider;
       updateApiLabel();
@@ -118,7 +183,7 @@
     segButtons.forEach(btn => {
       const isActive = btn.dataset.mode === currentMode;
       btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', String(isActive));
+      btn.setAttribute('aria-checked', String(isActive));
     });
   }
 
@@ -128,6 +193,11 @@
     const cleanName = name.replace(/\(.+\)/, '').trim();
     apiKeyLabel.textContent = `${cleanName} API Key`;
     apiKeyInput.placeholder = id === 'local' ? 'Optional (use "local" or leave empty)' : `Paste ${cleanName} API key`;
+    
+    // Update help link
+    if (apiKeyHelpLink && providerApiUrls[id]) {
+      apiKeyHelpLink.href = providerApiUrls[id];
+    }
   }
 
   function updateLocalFields() {
@@ -144,15 +214,21 @@
   }
 
   async function handleSave() {
+    clearValidation();
     const cfg = await gatherFormData();
     // For local provider, API key is optional, but endpoint and model are required
     if (cfg.enabled) {
       if (cfg.provider === 'local') {
-        if (!cfg.endpoints.local || !cfg.models.local) {
+        const missingEndpoint = !cfg.endpoints.local;
+        const missingModel = !cfg.models.local;
+        if (missingEndpoint) endpointInput.classList.add('input-invalid');
+        if (missingModel) modelInput.classList.add('input-invalid');
+        if (missingEndpoint || missingModel) {
           flashButton(saveBtn);
           return;
         }
       } else if (!(cfg.apiKeys[cfg.provider] || cfg.apiKeys.default)) {
+        apiKeyInput.classList.add('input-invalid');
         flashButton(saveBtn);
         return;
       }
@@ -164,13 +240,16 @@
       }
       saveBtn.disabled = true;
       saveBtn.textContent = 'Saved';
+      saveBtn.classList.add('is-pulsing');
       setTimeout(() => {
         saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Settings';
+        saveBtn.textContent = 'Save';
+        saveBtn.classList.remove('is-pulsing');
       }, 900);
     } catch {
-      saveBtn.textContent = 'Retry Save';
-      setTimeout(() => (saveBtn.textContent = 'Save Settings'), 1400);
+      saveBtn.classList.remove('is-pulsing');
+      saveBtn.textContent = 'Retry';
+      setTimeout(() => (saveBtn.textContent = 'Save'), 1400);
     }
   }
 
@@ -185,6 +264,7 @@
       models: {}
     };
     enabledToggle.checked = true;
+    updateStatusBadge();
     setMode('noHint');
     providerSelect.value = 'gemini';
     updateApiLabel();
@@ -195,6 +275,10 @@
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.sync) {
       await chrome.storage.sync.set(resetCfg);
     }
+    saveBtn.disabled = false;
+    saveBtn.classList.remove('is-pulsing');
+    saveBtn.textContent = 'Save';
+    clearValidation();
   }
 
   async function gatherFormData() {
@@ -235,6 +319,12 @@
       endpoints,
       models
     };
+  }
+
+  function clearValidation() {
+    apiKeyInput.classList.remove('input-invalid');
+    endpointInput.classList.remove('input-invalid');
+    modelInput.classList.remove('input-invalid');
   }
 
   function flashButton(el) {

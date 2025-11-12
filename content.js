@@ -34,7 +34,6 @@
 
   // State
   let simplifyButton = null;
-  let floatingButton = null;
   let resultsContainer = null;
   let isProcessing = false;
   let lastRequest = null; // stores last request for Regenerate
@@ -174,32 +173,25 @@
         }
       }
       
-      // Strategy 4: Create floating button as fallback
-      if (!injected && !floatingButton) {
-        log('Creating floating button as fallback');
-        createFloatingButton();
-        injected = true;
-      }
-      
       if (injected) {
         log('Button injection successful!');
         clearInterval(checkInterval);
         observePageChanges();
       } else if (initAttempts >= MAX_INIT_ATTEMPTS) {
-        logError('Max attempts reached. Creating floating button.');
+        logError('Max attempts reached. Could not find suitable location for button.');
         clearInterval(checkInterval);
-        createFloatingButton();
-        observePageChanges();
+        // Keep trying in background with longer intervals
+        const retryInterval = setInterval(() => {
+          const buttonArea = findButtonArea();
+          if (buttonArea && !document.getElementById('leetsimplify-btn')) {
+            if (injectSimplifyButton(buttonArea)) {
+              clearInterval(retryInterval);
+              observePageChanges();
+            }
+          }
+        }, 2000);
       }
     }, 500);
-
-    // Fallback: create floating button after 3 seconds regardless
-    setTimeout(() => {
-      if (!document.getElementById('leetsimplify-btn') && !floatingButton) {
-        log('Timeout: Creating floating button');
-        createFloatingButton();
-      }
-    }, 3000);
   }
 
   // Find the problem description container with improved selectors
@@ -262,24 +254,43 @@
 
   // Find area where difficulty/topic buttons are located
   function findButtonArea() {
-    // Look for difficulty indicators
+    // Look for difficulty indicators - prioritize this heavily
     const difficultySelectors = [
       '[class*="difficulty"]',
       '[class*="text-difficulty"]',
       'button[class*="easy"]',
       'button[class*="medium"]',
       'button[class*="hard"]',
-      'div[class*="difficulty"]'
+      'div[class*="difficulty"]',
+      '[data-difficulty]',
+      'span[class*="difficulty"]'
     ];
 
     for (const selector of difficultySelectors) {
       const element = document.querySelector(selector);
       if (element) {
-        // Find parent container that might hold buttons
-        let parent = element.closest('div[class*="flex"], div[class*="button"], div[class*="tag"]');
-        if (parent) {
-          log('Found button area via difficulty selector');
-          return parent;
+        const text = element.textContent.toLowerCase();
+        // Check if it's actually a difficulty indicator
+        if (text.includes('easy') || text.includes('medium') || text.includes('hard') || 
+            element.classList.toString().toLowerCase().includes('difficulty')) {
+          // Try multiple parent levels to find the best container
+          let parent = element.parentElement;
+          for (let i = 0; i < 5 && parent; i++) {
+            // Look for flex containers or containers with multiple buttons/tags
+            if (parent.classList.contains('flex') || 
+                window.getComputedStyle(parent).display === 'flex' ||
+                parent.querySelectorAll('button, [class*="tag"], [class*="badge"], [class*="chip"]').length > 0) {
+              log('Found button area via difficulty selector at level', i);
+              return parent;
+            }
+            parent = parent.parentElement;
+          }
+          // Fallback: return closest flex container or parent
+          parent = element.closest('div[class*="flex"], div[class*="button"], div[class*="tag"], div[class*="chip"]');
+          if (parent) {
+            log('Found button area via difficulty selector (fallback)');
+            return parent;
+          }
         }
       }
     }
@@ -383,40 +394,58 @@
     
     // Check if button already exists
     const existingBtn = document.getElementById('leetsimplify-btn');
+    if (existingBtn) {
+      // Button already exists, just update reference
+      simplifyButton = existingBtn;
+      return true;
+    }
 
     try {
       // Create button
-      const btn = existingBtn || createSimplifyButton();
+      const btn = createSimplifyButton();
       simplifyButton = btn;
 
-      // Prefer inserting after the entire container to avoid merging with inline chips
-      if (container.parentElement) {
-        container.parentElement.insertBefore(btn, container.nextSibling);
-        log('Button inserted after chip container');
-        return true;
-      }
-
-      // Try to insert in a flex container
-      if (container.classList.contains('flex') || window.getComputedStyle(container).display === 'flex') {
+      // Strategy 1: If container is a flex container, append directly (best for difficulty tag area)
+      const isFlex = container.classList.contains('flex') || 
+                     window.getComputedStyle(container).display === 'flex' ||
+                     window.getComputedStyle(container).display === 'inline-flex';
+      if (isFlex) {
         container.appendChild(btn);
         log('Button injected in flex container');
         return true;
       }
 
-      // Try to find a flex container within
-      const flexContainer = container.querySelector('[class*="flex"], div[style*="display: flex"]');
+      // Strategy 2: Try to find a flex container within
+      const flexContainer = container.querySelector('[class*="flex"], div[style*="display: flex"], div[style*="display:inline-flex"]');
       if (flexContainer) {
         flexContainer.appendChild(btn);
         log('Button injected in nested flex container');
         return true;
       }
 
-      // Try to insert after existing buttons
-      const existingButtons = container.querySelectorAll('button, [role="button"]');
+      // Strategy 3: Try to insert after difficulty tag or existing buttons/tags
+      const difficultyTag = container.querySelector('[class*="difficulty"], [data-difficulty]');
+      if (difficultyTag && difficultyTag.parentElement) {
+        difficultyTag.parentElement.insertBefore(btn, difficultyTag.nextSibling);
+        log('Button injected after difficulty tag');
+        return true;
+      }
+
+      // Strategy 4: Try to insert after existing buttons
+      const existingButtons = container.querySelectorAll('button, [role="button"], [class*="tag"], [class*="chip"], [class*="badge"]');
       if (existingButtons.length > 0) {
-        const lastButton = existingButtons[existingButtons.length - 1];
-        lastButton.parentElement.insertBefore(btn, lastButton.nextSibling);
-        log('Button injected after existing buttons');
+        const lastElement = existingButtons[existingButtons.length - 1];
+        if (lastElement.parentElement) {
+          lastElement.parentElement.insertBefore(btn, lastElement.nextSibling);
+          log('Button injected after existing buttons/tags');
+          return true;
+        }
+      }
+
+      // Strategy 5: Prefer inserting after the entire container to avoid merging with inline chips
+      if (container.parentElement) {
+        container.parentElement.insertBefore(btn, container.nextSibling);
+        log('Button inserted after chip container');
         return true;
       }
 
@@ -483,31 +512,6 @@
     return button;
   }
 
-  // Create floating button (always visible fallback)
-  function createFloatingButton() {
-    if (floatingButton || document.getElementById('leetsimplify-floating-btn')) {
-      return;
-    }
-
-    try {
-      floatingButton = document.createElement('button');
-      floatingButton.id = 'leetsimplify-floating-btn';
-      floatingButton.className = 'leetsimplify-floating-btn';
-      floatingButton.textContent = '✨ Simplify';
-      floatingButton.title = 'Simplify problem description with AI';
-      floatingButton.addEventListener('click', handleSimplifyClick);
-      
-      document.body.appendChild(floatingButton);
-      log('Floating button created');
-      
-      // Also set simplifyButton reference for state management
-      if (!simplifyButton) {
-        simplifyButton = floatingButton;
-      }
-    } catch (e) {
-      logError('Error creating floating button:', e);
-    }
-  }
 
   // Handle Simplify button click
   async function handleSimplifyClick(e) {
@@ -924,7 +928,7 @@
   // Set processing state
   function setProcessingState(processing) {
     isProcessing = processing;
-    const btn = document.getElementById('leetsimplify-btn') || document.getElementById('leetsimplify-floating-btn');
+    const btn = document.getElementById('leetsimplify-btn');
     if (btn) {
       btn.disabled = processing;
       btn.textContent = processing ? '⏳ Simplifying...' : '✨ Simplify';
@@ -940,7 +944,7 @@
 
     window.leetsimplifyObserver = new MutationObserver((mutations) => {
       // Check if button still exists and we're still on a problem page
-      if (isProblemPage() && !document.getElementById('leetsimplify-btn') && !document.getElementById('leetsimplify-floating-btn')) {
+      if (isProblemPage() && !document.getElementById('leetsimplify-btn')) {
         log('Button removed, re-injecting...');
         setTimeout(() => {
           if (isProblemPage()) {
@@ -973,11 +977,8 @@
       
       // Clear existing buttons
       const oldBtn = document.getElementById('leetsimplify-btn');
-      const oldFloating = document.getElementById('leetsimplify-floating-btn');
       if (oldBtn) oldBtn.remove();
-      if (oldFloating) oldFloating.remove();
       simplifyButton = null;
-      floatingButton = null;
       clearResults();
       
       // Re-initialize if on problem page
