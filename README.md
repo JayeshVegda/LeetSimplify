@@ -29,6 +29,30 @@
 
 ---
 
+## 🎬 Demo
+
+<div align="center" style="margin: 40px 0;">
+
+<div style="background: #262626; padding: 20px; border-radius: 12px; border: 1px solid #3A3A3A; display: inline-block; max-width: 100%;">
+
+<video width="800" height="450" controls style="border-radius: 8px; max-width: 100%; height: auto;">
+  <source src="icons/main_compressed.mp4" type="video/mp4">
+  <source src="icons/main.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+</div>
+
+<div style="margin-top: 15px; color: #8E8E8E; font-size: 0.9em;">
+
+*Watch LeetSimplify in action - transforming complex problems into beginner-friendly explanations*
+
+</div>
+
+</div>
+
+---
+
 ## 🎯 What It Does
 
 <div style="background: #262626; padding: 20px; border-radius: 8px; border-left: 4px solid #FFA116; margin: 20px 0;">
