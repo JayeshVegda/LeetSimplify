@@ -1,8 +1,14 @@
-# LeetSimplify 🚀
-
 <div align="center">
 
+# 🚀 LeetSimplify
+
+<div style="font-size: 1.2em; color: #8E8E8E; margin: 20px 0;">
+
 **Transform complex LeetCode problems into beginner-friendly explanations using AI**
+
+</div>
+
+<div style="margin: 30px 0;">
 
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/JayeshVegda/LeetSimplify/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -11,7 +17,29 @@
 [![CI](https://github.com/JayeshVegda/LeetSimplify/actions/workflows/ci.yml/badge.svg)](https://github.com/JayeshVegda/LeetSimplify/actions/workflows/ci.yml)
 [![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://jayeshvegda.github.io/LeetSimplify/)
 
-*Making coding interview preparation accessible to everyone*
+</div>
+
+<div style="background: linear-gradient(135deg, #28C244 0%, #FFA116 100%); padding: 20px; border-radius: 12px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+
+<h2 style="color: white; margin: 0; font-size: 1.5em;">✨ Making coding interview preparation accessible to everyone</h2>
+
+</div>
+
+</div>
+
+---
+
+## 🎯 What It Does
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border-left: 4px solid #FFA116; margin: 20px 0;">
+
+LeetSimplify takes complex LeetCode problem descriptions and rewrites them in **simple, beginner-friendly language** while preserving **every single detail**:
+
+- ✅ All conditions and constraints
+- ✅ All edge cases  
+- ✅ All input/output formats
+- ✅ Complete problem requirements
+- ✅ Detailed step-by-step examples
 
 </div>
 
@@ -19,68 +47,132 @@
 
 ## ✨ Features
 
-- 🤖 **Multiple AI Providers** - Support for Gemini, ChatGPT, Claude, Cohere, Mistral, and **Local LLMs (Ollama)**
-- 🎯 **Two Simplification Modes**
-  - **No Hint**: Pure problem simplification with all conditions preserved
-  - **With Hint**: Includes gentle thinking hints to guide your approach
-- 🔒 **Privacy-First** - Use local LLMs (Ollama) for complete privacy - no data leaves your machine
-- 📚 **Complete Problem Details** - Preserves ALL conditions, constraints, and edge cases in easy language
-- 🎨 **Seamless Integration** - Beautiful UI that blends perfectly with LeetCode's interface
-- ⚡ **Fast & Reliable** - Optimized for quick responses with error handling
-- 🔄 **Regenerate Support** - Easy regeneration of simplified explanations
-- 📖 **Detailed Examples** - Step-by-step dry-run explanations for better understanding
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;">
 
-## 🎯 What It Does
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
 
-LeetSimplify takes complex LeetCode problem descriptions and rewrites them in simple, beginner-friendly language while preserving **every single detail**:
+### 🤖 Multiple AI Providers
+Support for Gemini, ChatGPT, Claude, Cohere, Mistral, and **Local LLMs (Ollama)**
 
-- ✅ All conditions and constraints
-- ✅ All edge cases
-- ✅ All input/output formats
-- ✅ Complete problem requirements
-- ✅ Detailed step-by-step examples
+</div>
 
-Perfect for beginners who want to understand problems clearly before coding!
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
 
-## 📦 Installation
+### 🎯 Two Simplification Modes
+- **No Hint**: Pure problem simplification
+- **With Hint**: Includes gentle thinking hints
 
-### Method 1: From Source (Recommended)
+</div>
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/JayeshVegda/LeetSimplify.git
-   cd LeetSimplify
-   ```
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
 
-2. **Load in Chrome**:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable **"Developer mode"** (toggle in top right)
-   - Click **"Load unpacked"**
-   - Select the `LeetSimplify` directory
+### 🔒 Privacy-First
+Use local LLMs (Ollama) for complete privacy - no data leaves your machine
 
-3. **Verify installation**:
-   - The LeetSimplify icon should appear in your toolbar
-   - Navigate to any LeetCode problem page
-   - You should see a "Simplify" button
+</div>
 
-### Method 2: Chrome Web Store
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
 
-*Coming soon!*
+### 📚 Complete Problem Details
+Preserves ALL conditions, constraints, and edge cases in easy language
+
+</div>
+
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
+
+### 🎨 Seamless Integration
+Beautiful UI that blends perfectly with LeetCode's interface
+
+</div>
+
+<div style="background: #262626; padding: 15px; border-radius: 8px; border: 1px solid #3A3A3A;">
+
+### ⚡ Fast & Reliable
+Optimized for quick responses with error handling
+
+</div>
+
+</div>
+
+---
 
 ## 🚀 Quick Start
 
-### Cloud Providers Setup
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  📦 Installation
+</summary>
 
-1. Click the extension icon in your toolbar
-2. Select your preferred provider (Gemini, ChatGPT, Claude, etc.)
-3. Enter your API key
-4. Choose simplification mode (No Hint / With Hint)
-5. Click **"Save Settings"**
-6. Navigate to a LeetCode problem and click **"Simplify"**
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
 
-### Local LLM Setup (Ollama)
+### Method 1: From Source (Recommended)
 
-**Privacy-friendly option - all processing happens on your machine!**
+<ol>
+<li><strong>Clone the repository</strong>:
+   <pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>git clone https://github.com/JayeshVegda/LeetSimplify.git
+cd LeetSimplify</code></pre>
+</li>
+
+<li><strong>Load in Chrome</strong>:
+   <ul>
+   <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+   <li>Enable <strong>"Developer mode"</strong> (toggle in top right)</li>
+   <li>Click <strong>"Load unpacked"</strong></li>
+   <li>Select the <code>LeetSimplify</code> directory</li>
+   </ul>
+</li>
+
+<li><strong>Verify installation</strong>:
+   <ul>
+   <li>The LeetSimplify icon should appear in your toolbar</li>
+   <li>Navigate to any LeetCode problem page</li>
+   <li>You should see a "Simplify" button</li>
+   </ul>
+</li>
+</ol>
+
+### Method 2: Chrome Web Store
+
+<div style="background: #262626; padding: 15px; border-radius: 6px; text-align: center; color: #8E8E8E;">
+*Coming soon!*
+</div>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  ☁️ Cloud Providers Setup
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ol>
+<li>Click the extension icon in your toolbar</li>
+<li>Select your preferred provider (Gemini, ChatGPT, Claude, etc.)</li>
+<li>Enter your API key</li>
+<li>Choose simplification mode (No Hint / With Hint)</li>
+<li>Click <strong>"Save Settings"</strong></li>
+<li>Navigate to a LeetCode problem and click <strong>"Simplify"</strong></li>
+</ol>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🏠 Local LLM Setup (Ollama) - Privacy-Friendly
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<div style="background: linear-gradient(135deg, rgba(40, 194, 68, 0.2) 0%, rgba(40, 194, 68, 0.1) 100%); padding: 15px; border-radius: 8px; border-left: 4px solid #28C244; margin-bottom: 20px;">
+
+<strong>🔒 All processing happens on your machine - no data leaves your computer!</strong>
+
+</div>
 
 #### Step 1: Install Ollama
 
@@ -88,117 +180,427 @@ Download from [ollama.com](https://ollama.com) and install.
 
 #### Step 2: Download a Model
 
-```bash
-# Recommended: Mistral (good balance of quality and speed)
+<pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code># Recommended: Mistral (good balance of quality and speed)
 ollama pull mistral
 
 # Or try other models
 ollama pull llama3
 ollama pull codellama
-ollama pull phi
-```
+ollama pull phi</code></pre>
 
 #### Step 3: Configure CORS (Important!)
 
-**Windows:**
-```cmd
-# Run as Administrator
-setx OLLAMA_ORIGINS "chrome-extension://*" /M
-```
+<details>
+<summary style="cursor: pointer; padding: 10px; background: #262626; border-radius: 6px; margin: 10px 0; font-weight: 600;">
+  Windows
+</summary>
+
+<div style="padding: 15px; background: #1A1A1A; border-radius: 6px; margin-top: 10px;">
+
+<pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code># Run as Administrator
+setx OLLAMA_ORIGINS "chrome-extension://*" /M</code></pre>
+
 Then restart Ollama (end process in Task Manager, it will restart automatically).
 
-**macOS/Linux:**
-```bash
-export OLLAMA_ORIGINS="chrome-extension://*"
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 10px; background: #262626; border-radius: 6px; margin: 10px 0; font-weight: 600;">
+  macOS/Linux
+</summary>
+
+<div style="padding: 15px; background: #1A1A1A; border-radius: 6px; margin-top: 10px;">
+
+<pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>export OLLAMA_ORIGINS="chrome-extension://*"
 # Make it permanent by adding to ~/.bashrc or ~/.zshrc
 echo 'export OLLAMA_ORIGINS="chrome-extension://*"' >> ~/.bashrc
-source ~/.bashrc
-```
+source ~/.bashrc</code></pre>
+
+</div>
+
+</details>
 
 See [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for detailed instructions.
 
 #### Step 4: Configure Extension
 
-1. Open extension settings
-2. Select **"Local (Ollama/Self-hosted)"** as provider
-3. Set **Endpoint**: `http://127.0.0.1:11434/v1/chat/completions`
-   - Or use native API: `http://127.0.0.1:11434/api/generate`
-4. Set **Model**: `mistral` (or your downloaded model)
-5. API Key: Leave empty or use "local" (not required)
-6. Click **"Save Settings"**
+<ol>
+<li>Open extension settings</li>
+<li>Select <strong>"Local (Ollama/Self-hosted)"</strong> as provider</li>
+<li>Set <strong>Endpoint</strong>: <code>http://127.0.0.1:11434/v1/chat/completions</code>
+   <ul>
+   <li>Or use native API: <code>http://127.0.0.1:11434/api/generate</code></li>
+   </ul>
+</li>
+<li>Set <strong>Model</strong>: <code>mistral</code> (or your downloaded model)</li>
+<li>API Key: Leave empty or use "local" (not required)</li>
+<li>Click <strong>"Save Settings"</strong></li>
+</ol>
 
 #### Step 5: Test
 
-1. Navigate to any LeetCode problem
-2. Click the **"Simplify"** button
-3. Enjoy your simplified problem description!
+<ol>
+<li>Navigate to any LeetCode problem</li>
+<li>Click the <strong>"Simplify"</strong> button</li>
+<li>Enjoy your simplified problem description! 🎉</li>
+</ol>
+
+</div>
+
+</details>
+
+---
 
 ## 📖 Usage
 
-1. **Navigate** to any LeetCode problem page (e.g., `https://leetcode.com/problems/two-sum/`)
-2. **Click** the **"Simplify"** button (appears near the problem description)
-3. **Read** the simplified, beginner-friendly explanation with:
-   - Complete problem description in easy language
-   - All inputs and outputs explained
-   - All rules and constraints listed
-   - All edge cases mentioned
-   - Detailed step-by-step example with dry-run explanation
+<div style="background: #262626; padding: 20px; border-radius: 8px; border-left: 4px solid #4A9EFF; margin: 20px 0;">
+
+<ol>
+<li><strong>Navigate</strong> to any LeetCode problem page (e.g., <code>https://leetcode.com/problems/two-sum/</code>)</li>
+<li><strong>Click</strong> the <strong>"Simplify"</strong> button (appears near the problem description)</li>
+<li><strong>Read</strong> the simplified, beginner-friendly explanation with:
+   <ul>
+   <li>Complete problem description in easy language</li>
+   <li>All inputs and outputs explained</li>
+   <li>All rules and constraints listed</li>
+   <li>All edge cases mentioned</li>
+   <li>Detailed step-by-step example with dry-run explanation</li>
+   </ul>
+</li>
+</ol>
 
 ### Regenerate
 
-Click the **"↻ Regenerate"** button (inline with mode/provider chips) to get a new simplification.
+Click the <strong>"↻ Regenerate"</strong> button (inline with mode/provider chips) to get a new simplification.
 
-## 🎨 Features in Detail
+</div>
 
-### Complete Problem Preservation
-
-Unlike other tools, LeetSimplify ensures **every detail** is preserved:
-- All conditions and constraints
-- All edge cases
-- All input/output formats
-- All special requirements
-- Complete problem statement
-
-### Detailed Examples
-
-Each simplified problem includes:
-- Clear input/output examples
-- Step-by-step dry-run explanations
-- Explicit counting and calculations
-- Constraint verification
-- Why the answer is correct
-
-### Two Modes
-
-- **No Hint Mode**: Pure problem simplification - perfect for practice
-- **With Hint Mode**: Includes gentle thinking hints - great for learning
+---
 
 ## 🔧 Supported Providers
 
-### Cloud Providers
-- **Gemini** (Google) - `gemini-2.5-flash` (default)
-- **ChatGPT** (OpenAI) - `gpt-4o-mini` (default)
-- **Claude** (Anthropic) - `claude-3-5-sonnet-latest` (default)
-- **Cohere** - `command-r-plus` (default)
-- **Mistral** - `mistral-large-latest` (default)
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  ☁️ Cloud Providers
+</summary>
 
-### Local LLMs (Ollama)
-- **Mistral 7B** (Recommended - ~4GB)
-- **Llama 3** (~5GB)
-- **CodeLlama** (~4-7GB)
-- **Phi** (~2GB)
-- **Any Ollama model** - Just pull and use!
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
 
-### Other Local Servers
+<ul>
+<li><strong>Gemini</strong> (Google) - <code>gemini-2.5-flash</code> (default)</li>
+<li><strong>ChatGPT</strong> (OpenAI) - <code>gpt-4o-mini</code> (default)</li>
+<li><strong>Claude</strong> (Anthropic) - <code>claude-3-5-sonnet-latest</code> (default)</li>
+<li><strong>Cohere</strong> - <code>command-r-plus</code> (default)</li>
+<li><strong>Mistral</strong> - <code>mistral-large-latest</code> (default)</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🏠 Local LLMs (Ollama)
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ul>
+<li><strong>Mistral 7B</strong> (Recommended - ~4GB)</li>
+<li><strong>Llama 3</strong> (~5GB)</li>
+<li><strong>CodeLlama</strong> (~4-7GB)</li>
+<li><strong>Phi</strong> (~2GB)</li>
+<li><strong>Any Ollama model</strong> - Just pull and use!</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🔌 Other Local Servers
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
 Works with any OpenAI-compatible API:
-- **LM Studio** - `http://localhost:1234/v1/chat/completions`
-- **vLLM** - Your vLLM server endpoint
-- **Custom servers** - Any OpenAI-compatible endpoint
+
+<ul>
+<li><strong>LM Studio</strong> - <code>http://localhost:1234/v1/chat/completions</code></li>
+<li><strong>vLLM</strong> - Your vLLM server endpoint</li>
+<li><strong>Custom servers</strong> - Any OpenAI-compatible endpoint</li>
+</ul>
+
+</div>
+
+</details>
+
+---
+
+## 🎨 Features in Detail
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  📚 Complete Problem Preservation
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+Unlike other tools, LeetSimplify ensures <strong>every detail</strong> is preserved:
+
+<ul>
+<li>All conditions and constraints</li>
+<li>All edge cases</li>
+<li>All input/output formats</li>
+<li>All special requirements</li>
+<li>Complete problem statement</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  📝 Detailed Examples
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+Each simplified problem includes:
+
+<ul>
+<li>Clear input/output examples</li>
+<li>Step-by-step dry-run explanations</li>
+<li>Explicit counting and calculations</li>
+<li>Constraint verification</li>
+<li>Why the answer is correct</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🎯 Two Modes
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ul>
+<li><strong>No Hint Mode</strong>: Pure problem simplification - perfect for practice</li>
+<li><strong>With Hint Mode</strong>: Includes gentle thinking hints - great for learning</li>
+</ul>
+
+</div>
+
+</details>
+
+---
+
+## 🛠️ Requirements
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🌐 Browser Requirements
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ul>
+<li>Chrome 88+ (or any Chromium-based browser)</li>
+<li>Edge, Brave, Opera, etc. (Chromium-based)</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  💻 For Local LLMs (Ollama)
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ul>
+<li><strong>RAM</strong>: Minimum 8GB (16GB recommended)</li>
+<li><strong>Storage</strong>: 4-10GB for models</li>
+<li><strong>GPU</strong>: Optional but recommended for faster inference</li>
+<li><strong>OS</strong>: Windows, macOS, or Linux</li>
+</ul>
+
+</div>
+
+</details>
+
+---
+
+## 🔒 Privacy & Security
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;">
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #3A3A3A;">
+
+### ☁️ Cloud Providers
+
+<ul>
+<li>Problem descriptions are sent to the selected API provider</li>
+<li>API keys are stored locally in Chrome's sync storage (encrypted)</li>
+<li>No data is collected by the extension itself</li>
+</ul>
+
+</div>
+
+<div style="background: linear-gradient(135deg, rgba(40, 194, 68, 0.2) 0%, rgba(40, 194, 68, 0.1) 100%); padding: 20px; border-radius: 8px; border: 1px solid #28C244;">
+
+### 🏠 Local LLMs (Ollama)
+
+<ul>
+<li><strong>Complete privacy</strong> - All processing happens on your machine</li>
+<li>No data leaves your computer</li>
+<li>No internet connection required (after model download)</li>
+<li>Perfect for sensitive problems or offline use</li>
+</ul>
+
+</div>
+
+</div>
+
+---
+
+## 🐛 Troubleshooting
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🔧 Local LLM Connection Issues
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<div style="background: #EF4743; color: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+
+<strong>Most common issue: CORS blocking</strong>
+
+</div>
+
+**Quick Fix:**
+<ol>
+<li>Set <code>OLLAMA_ORIGINS=chrome-extension://*</code> environment variable</li>
+<li>Restart Ollama service</li>
+<li>Reload the extension</li>
+</ol>
+
+See [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for detailed platform-specific instructions.
+
+**Other Issues:**
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+<tr style="background: #262626;">
+<th style="padding: 10px; text-align: left; border: 1px solid #3A3A3A;">Issue</th>
+<th style="padding: 10px; text-align: left; border: 1px solid #3A3A3A;">Solution</th>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">"Cannot connect to Ollama"</td>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Check Ollama is running: <code>curl http://127.0.0.1:11434/api/version</code></td>
+</tr>
+<tr style="background: #262626;">
+<td style="padding: 10px; border: 1px solid #3A3A3A;">"Model not found"</td>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Verify model is downloaded: <code>ollama list</code></td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">"CORS error"</td>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Set <code>OLLAMA_ORIGINS=chrome-extension://*</code> and restart Ollama</td>
+</tr>
+<tr style="background: #262626;">
+<td style="padding: 10px; border: 1px solid #3A3A3A;">"Empty response"</td>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Model might be loading - wait a few seconds and try again</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Extension not appearing</td>
+<td style="padding: 10px; border: 1px solid #3A3A3A;">Reload extension in <code>chrome://extensions/</code></td>
+</tr>
+</table>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🔑 API Key Issues
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ul>
+<li><strong>Cloud providers</strong>: Verify your API key is correct and has sufficient credits</li>
+<li><strong>Local providers</strong>: API key is optional (leave empty or use "local")</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  🖥️ Browser Console
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+Check browser console (F12) for detailed error messages:
+
+<ul>
+<li>Look for <code>[LeetSimplify]</code> logs</li>
+<li>Check Network tab for failed requests</li>
+<li>Verify extension permissions</li>
+</ul>
+
+</div>
+
+</details>
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  ❓ Still Having Issues?
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<ol>
+<li>Check [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for detailed setup</li>
+<li>Check [QUICK_FIX.md](QUICK_FIX.md) for quick solutions</li>
+<li>Open an issue on GitHub with:
+   <ul>
+   <li>Browser version</li>
+   <li>Extension version</li>
+   <li>Error messages from console</li>
+   <li>Steps to reproduce</li>
+   </ul>
+</li>
+</ol>
+
+</div>
+
+</details>
+
+---
 
 ## 📁 Project Structure
 
-```
-LeetSimplify/
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  📂 View Project Structure
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+<pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 0.9em;"><code>LeetSimplify/
 ├── content.js              # Main content script (LeetCode integration)
 ├── providers.js            # LLM provider implementations
 ├── prompts.json            # AI prompts configuration
@@ -215,168 +617,187 @@ LeetSimplify/
 └── icons/
     ├── icon16.png          # Extension icon (16x16)
     ├── icon48.png          # Extension icon (48x48)
-    └── icon128.png         # Extension icon (128x128)
-```
+    └── icon128.png         # Extension icon (128x128)</code></pre>
 
-## 🛠️ Requirements
+</div>
 
-### Browser
-- Chrome 88+ (or any Chromium-based browser)
-- Edge, Brave, Opera, etc. (Chromium-based)
+</details>
 
-### For Local LLMs (Ollama)
-- **RAM**: Minimum 8GB (16GB recommended)
-- **Storage**: 4-10GB for models
-- **GPU**: Optional but recommended for faster inference
-- **OS**: Windows, macOS, or Linux
-
-## 🔒 Privacy & Security
-
-### Cloud Providers
-- Problem descriptions are sent to the selected API provider
-- API keys are stored locally in Chrome's sync storage (encrypted)
-- No data is collected by the extension itself
-
-### Local LLMs (Ollama)
-- **Complete privacy** - All processing happens on your machine
-- No data leaves your computer
-- No internet connection required (after model download)
-- Perfect for sensitive problems or offline use
-
-## 🐛 Troubleshooting
-
-### Local LLM Connection Issues
-
-**Most common issue: CORS blocking**
-
-**Quick Fix:**
-1. Set `OLLAMA_ORIGINS=chrome-extension://*` environment variable
-2. Restart Ollama service
-3. Reload the extension
-
-See [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for detailed platform-specific instructions.
-
-**Other Issues:**
-
-| Issue | Solution |
-|-------|----------|
-| "Cannot connect to Ollama" | Check Ollama is running: `curl http://127.0.0.1:11434/api/version` |
-| "Model not found" | Verify model is downloaded: `ollama list` |
-| "CORS error" | Set `OLLAMA_ORIGINS=chrome-extension://*` and restart Ollama |
-| "Empty response" | Model might be loading - wait a few seconds and try again |
-| Extension not appearing | Reload extension in `chrome://extensions/` |
-
-### API Key Issues
-
-- **Cloud providers**: Verify your API key is correct and has sufficient credits
-- **Local providers**: API key is optional (leave empty or use "local")
-
-### Browser Console
-
-Check browser console (F12) for detailed error messages:
-- Look for `[LeetSimplify]` logs
-- Check Network tab for failed requests
-- Verify extension permissions
-
-### Still Having Issues?
-
-1. Check [OLLAMA_SETUP.md](OLLAMA_SETUP.md) for detailed setup
-2. Check [QUICK_FIX.md](QUICK_FIX.md) for quick solutions
-3. Open an issue on GitHub with:
-   - Browser version
-   - Extension version
-   - Error messages from console
-   - Steps to reproduce
+---
 
 ## 🤝 Contributing
 
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  💡 How to Contribute
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
 Contributions are welcome! Here's how you can help:
 
-1. **Fork the repository**
-2. **Create a feature branch**:
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-4. **Test thoroughly**
-5. **Commit your changes**:
-   ```bash
-   git commit -m 'Add some amazing feature'
-   ```
-6. **Push to the branch**:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-7. **Open a Pull Request**
+<ol>
+<li><strong>Fork the repository</strong></li>
+<li><strong>Create a feature branch</strong>:
+   <pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>git checkout -b feature/amazing-feature</code></pre>
+</li>
+<li><strong>Make your changes</strong></li>
+<li><strong>Test thoroughly</strong></li>
+<li><strong>Commit your changes</strong>:
+   <pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>git commit -m 'Add some amazing feature'</code></pre>
+</li>
+<li><strong>Push to the branch</strong>:
+   <pre style="background: #262626; padding: 15px; border-radius: 6px; overflow-x: auto;"><code>git push origin feature/amazing-feature</code></pre>
+</li>
+<li><strong>Open a Pull Request</strong></li>
+</ol>
 
 ### Development Setup
 
-1. Clone the repository
-2. Load the extension in Chrome (Developer mode)
-3. Make changes to files
-4. Reload the extension to test
-5. Check browser console for errors
+<ol>
+<li>Clone the repository</li>
+<li>Load the extension in Chrome (Developer mode)</li>
+<li>Make changes to files</li>
+<li>Reload the extension to test</li>
+<li>Check browser console for errors</li>
+</ol>
 
 ### Code Style
 
-- Use vanilla JavaScript (no frameworks)
-- Follow existing code style
-- Add comments for complex logic
-- Test on actual LeetCode pages
+<ul>
+<li>Use vanilla JavaScript (no frameworks)</li>
+<li>Follow existing code style</li>
+<li>Add comments for complex logic</li>
+<li>Test on actual LeetCode pages</li>
+</ul>
+
+</div>
+
+</details>
+
+---
+
+## 📊 Version History
+
+<details>
+<summary style="cursor: pointer; padding: 15px; background: #262626; border-radius: 8px; border: 1px solid #3A3A3A; font-size: 1.2em; font-weight: 600; margin: 10px 0;">
+  📝 View Version History
+</summary>
+
+<div style="padding: 20px; background: #1A1A1A; border-radius: 8px; margin-top: 10px;">
+
+### v1.1.0 (Current)
+
+<ul>
+<li>✨ Added local LLM support (Ollama)</li>
+<li>🎨 Improved regenerate button positioning</li>
+<li>📝 Enhanced prompts for complete problem preservation</li>
+<li>🔧 Added automatic fallback to Ollama native API</li>
+<li>🐛 Improved error handling and CORS support</li>
+<li>📚 Added detailed dry-run example explanations</li>
+</ul>
+
+### v1.0.1
+
+<ul>
+<li>🎯 Added multiple AI provider support</li>
+<li>🎨 Improved UI and styling</li>
+<li>🔒 Added context invalidation handling</li>
+<li>📝 Improved prompts for better accuracy</li>
+</ul>
+
+</div>
+
+</details>
+
+---
+
+## 🗺️ Roadmap
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border-left: 4px solid #FFA116; margin: 20px 0;">
+
+<ul>
+<li>[ ] Support for more local LLM servers</li>
+<li>[ ] Custom prompt templates</li>
+<li>[ ] Problem difficulty analysis</li>
+<li>[ ] Solution hints (optional)</li>
+<li>[ ] Dark/light theme toggle</li>
+<li>[ ] Export simplified problems</li>
+<li>[ ] Browser extension store publication</li>
+</ul>
+
+</div>
+
+---
+
+## 📞 Support
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #3A3A3A; text-align: center;">
+
+### 🐛 Issues
+[GitHub Issues](https://github.com/JayeshVegda/LeetSimplify/issues)
+
+</div>
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #3A3A3A; text-align: center;">
+
+### 💬 Discussions
+[GitHub Discussions](https://github.com/JayeshVegda/LeetSimplify/discussions)
+
+</div>
+
+<div style="background: #262626; padding: 20px; border-radius: 8px; border: 1px solid #3A3A3A; text-align: center;">
+
+### 📚 Documentation
+[OLLAMA_SETUP.md](OLLAMA_SETUP.md) · [QUICK_FIX.md](QUICK_FIX.md)
+
+</div>
+
+</div>
+
+---
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+---
+
 ## 🙏 Acknowledgments
 
-- Built for the LeetCode community
-- Uses OpenAI-compatible API standards for local LLM support
-- Inspired by the need for clearer problem explanations
-- Thanks to all AI providers for their APIs
+<div style="background: #262626; padding: 20px; border-radius: 8px; margin: 20px 0;">
 
-## 📊 Version History
+<ul>
+<li>Built for the LeetCode community</li>
+<li>Uses OpenAI-compatible API standards for local LLM support</li>
+<li>Inspired by the need for clearer problem explanations</li>
+<li>Thanks to all AI providers for their APIs</li>
+</ul>
 
-### v1.1.0 (Current)
-- ✨ Added local LLM support (Ollama)
-- 🎨 Improved regenerate button positioning
-- 📝 Enhanced prompts for complete problem preservation
-- 🔧 Added automatic fallback to Ollama native API
-- 🐛 Improved error handling and CORS support
-- 📚 Added detailed dry-run example explanations
-
-### v1.0.1
-- 🎯 Added multiple AI provider support
-- 🎨 Improved UI and styling
-- 🔒 Added context invalidation handling
-- 📝 Improved prompts for better accuracy
-
-## 🗺️ Roadmap
-
-- [ ] Support for more local LLM servers
-- [ ] Custom prompt templates
-- [ ] Problem difficulty analysis
-- [ ] Solution hints (optional)
-- [ ] Dark/light theme toggle
-- [ ] Export simplified problems
-- [ ] Browser extension store publication
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/JayeshVegda/LeetSimplify/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/JayeshVegda/LeetSimplify/discussions)
-- **Documentation**: See [OLLAMA_SETUP.md](OLLAMA_SETUP.md) and [QUICK_FIX.md](QUICK_FIX.md)
-
-## ⭐ Star History
-
-If you find this project helpful, please consider giving it a star! ⭐
+</div>
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for the LeetCode community**
+<div style="background: linear-gradient(135deg, #28C244 0%, #FFA116 100%); padding: 30px; border-radius: 12px; margin: 40px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+
+<h2 style="color: white; margin: 0 0 20px 0;">Made with ❤️ for the LeetCode community</h2>
+
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
 
 [Report Bug](https://github.com/JayeshVegda/LeetSimplify/issues) · [Request Feature](https://github.com/JayeshVegda/LeetSimplify/issues) · [Contributing](https://github.com/JayeshVegda/LeetSimplify/blob/main/CONTRIBUTING.md)
+
+</div>
+
+<div style="margin-top: 30px; color: white; font-size: 1.2em;">
+
+**If you find this project helpful, please consider giving it a star! ⭐**
+
+</div>
+
+</div>
 
 </div>
